@@ -65,7 +65,7 @@ const App = () => {
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-
+    
         var requestOptions = {
             method: 'PUT',
             headers: myHeaders,
@@ -79,6 +79,7 @@ const App = () => {
             .catch(error => console.log('error', error));
     }
 
+
     useEffect(() => {
         getTasks("https://assets.breatheco.de/apis/fake/todos/user/lfparra")
     }, []);
@@ -87,9 +88,9 @@ const App = () => {
         /* console.log(e.key) */
         if (e.key === "Enter" && e.target.value !== "") {
             /* console.log(e.target.value); */
-            let task = { 
-                label: e.target.value, 
-                done: false 
+            let task = {
+                label: e.target.value,
+                done: false
             }
             let data = {
                 tareasAPI: [...state.tareasAPI, task] //["tarea1", "tarea2", "tarea3", "nuevaTarea"],
@@ -114,6 +115,18 @@ const App = () => {
         });
 
         putTasks("https://assets.breatheco.de/apis/fake/todos/user/lfparra", data);
+
+    }
+
+    const deleteAllTask = e => {
+        var requestOptions = {
+            method: 'DELETE',
+            redirect: 'follow'
+        };
+        fetch("https://assets.breatheco.de/apis/fake/todos/user/lfparra", requestOptions)
+            .then(response => response.json())
+            .then(result =>  getTasks("https://assets.breatheco.de/apis/fake/todos/user/lfparra"))
+            .catch(error => console.log('error', error));
     }
 
     return (
@@ -140,8 +153,9 @@ const App = () => {
                         }
                     </ul>
                     <h5>Tareas pendientes: {state.tareasAPI.length}</h5>
+                    <button onClick={deleteAllTask}>Borrar usuario y tareas</button>
                 </div>
-                
+
             </div>
         </div>
 
