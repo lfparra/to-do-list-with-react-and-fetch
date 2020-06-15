@@ -1,13 +1,58 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin:0;
+    padding:0;
+    background-color: darkcyan;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.post-it {
+    text-decoration:none;
+    background:#ffc;
+    height: 100%;
+    width: 100%;
+    margin: 30px auto;
+    box-shadow:
+        /* The top layer shadow */
+        0 1px 1px rgba(0,0,0,0.15),
+        /* The second layer */
+        0 10px 0 -5px #ffc,
+        /* The second layer shadow */
+        0 10px 1px -4px rgba(0,0,0,0.15),
+        /* The third layer */
+        0 20px 0 -10px #ffc,
+        /* The third layer shadow */
+        0 20px 1px -9px rgba(0,0,0,0.15);
+        /* Padding for demo purposes */
+        padding: 30px;
 }
+
+input {
+    background-color: transparent;
+    width: 100%;
+    height: 40px;
+    border: 2px solid rgb(255, 255, 166) ;
+    padding: 0;
+    outline: none;
+}
+ul {
+    margin-top: 10px;
+
+}
+li, span {
+    font-size: 25px;
+    margin-bottom: 5px;
+    padding: 5px 0px;
+}
+.fa, .fas {
+    float: right;
+    margin-right: 15px;
+    color: #ffc;
+}
+.fa:hover, .fas:hover {
+    color: black;
+}
+
+h6 {
+    margin-left: 80%;
+    text-align: end;
+}
+
