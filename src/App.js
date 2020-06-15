@@ -61,7 +61,7 @@ const App = () => {
             .catch(error => console.log('error', error));
     }
 
-    const putTasks = (url) => {
+    const putTasks = (url, data) => {
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -69,7 +69,7 @@ const App = () => {
         var requestOptions = {
             method: 'PUT',
             headers: myHeaders,
-            body: JSON.stringify(...state.tareasAPI),
+            body: JSON.stringify(data),
             redirect: 'follow'
         };
 
@@ -97,9 +97,8 @@ const App = () => {
             setState(prevState => {
                 return { ...prevState, ...data }
             })
-
+            putTasks("https://assets.breatheco.de/apis/fake/todos/user/lfparra", [...state.tareasAPI, task]);
             e.target.value = "";
-            putTasks("https://assets.breatheco.de/apis/fake/todos/user/lfparra");
         }
     }
 
@@ -107,13 +106,14 @@ const App = () => {
         console.log(e.target.id);
         let index = e.target.id;
         console.log(index);
-        let data = state.tareasAPI.splice(e.target.id, 1);
+        let data = state.tareasAPI;
+        data.splice(e.target.id, 1);
 
         setState(prevState => {
-            return { ...prevState, ...data }
+            return { ...prevState, tareasApi: data }
         });
 
-        putTasks("https://assets.breatheco.de/apis/fake/todos/user/lfparra");
+        putTasks("https://assets.breatheco.de/apis/fake/todos/user/lfparra", data);
     }
 
     return (
@@ -139,7 +139,9 @@ const App = () => {
                                 )
                         }
                     </ul>
+                    <h5>Tareas pendientes: {state.tareasAPI.length}</h5>
                 </div>
+                
             </div>
         </div>
 
