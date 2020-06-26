@@ -9,7 +9,8 @@ const App = () => {
             done: null
         }],
     })
-
+    const urlApi = "http://localhost:5000/todos/user/leoparra"
+    
     const getTasks = (url) => {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
@@ -65,7 +66,7 @@ const App = () => {
 
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-    
+
         var requestOptions = {
             method: 'PUT',
             headers: myHeaders,
@@ -81,7 +82,7 @@ const App = () => {
 
 
     useEffect(() => {
-        getTasks("https://assets.breatheco.de/apis/fake/todos/user/lfparra")
+        getTasks(urlApi)
     }, []);
 
     const handleChangeInput = e => {
@@ -98,7 +99,7 @@ const App = () => {
             setState(prevState => {
                 return { ...prevState, ...data }
             })
-            putTasks("https://assets.breatheco.de/apis/fake/todos/user/lfparra", [...state.tareasAPI, task]);
+            putTasks(urlApi, [...state.tareasAPI, task]);
             e.target.value = "";
         }
     }
@@ -114,7 +115,7 @@ const App = () => {
             return { ...prevState, tareasApi: data }
         });
 
-        putTasks("https://assets.breatheco.de/apis/fake/todos/user/lfparra", data);
+        putTasks(urlApi, data);
 
     }
 
@@ -123,9 +124,9 @@ const App = () => {
             method: 'DELETE',
             redirect: 'follow'
         };
-        fetch("https://assets.breatheco.de/apis/fake/todos/user/lfparra", requestOptions)
+        fetch(urlApi, requestOptions)
             .then(response => response.json())
-            .then(result =>  getTasks("https://assets.breatheco.de/apis/fake/todos/user/lfparra"))
+            .then(result => getTasks(urlApi))
             .catch(error => console.log('error', error));
     }
 
@@ -133,7 +134,7 @@ const App = () => {
         <div className="row">
             <div className="offset-3 col-6">
                 <div className="post-it">
-                    <h3>To-Do List</h3>
+                    <h3>{`To-Do List de ${urlApi.replace("http://localhost:5000/todos/user/","")}`}</h3>
                     <input type="text" placeholder="Press enter" onKeyPress={handleChangeInput} />
                     <ul>
                         {
